@@ -39,6 +39,8 @@ import (
 	// _ "k8s.io/client-go/plugin/pkg/client/auth/openstack"
 )
 
+var clientset *kubernetes.Clientset
+
 func main() {
 	var kubeconfig *string
 	if home := homedir.HomeDir(); home != "" {
@@ -47,27 +49,28 @@ func main() {
 		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	}
 	flag.Parse()
-
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
 	if err != nil {
 		panic(err.Error())
 	}
-
 	// create the clientset
-	clientset, err := kubernetes.NewForConfig(config)
+	clientset, err = kubernetes.NewForConfig(config)
 	if err != nil {
 		panic(err.Error())
 	}
+	GetPods("istio-system")
+	GetPods("")
+}
 
-	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+func GetPods(namespace string) {
+	pods, err := clientset.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
+	fmt.Printf("There are %d pods in the namespace %s\n", len(pods.Items), namespace)
 
 	for _,pod := range pods.Items {
 		fmt.Printf("Namespace: %s, Name: %s\n", pod.Namespace, pod.Name)
 	}
-	
 }
