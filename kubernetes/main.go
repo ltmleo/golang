@@ -24,6 +24,7 @@ import (
 	"path/filepath"
     "os"
 
+	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -73,4 +74,24 @@ func GetPods(namespace string) {
 	for _,pod := range pods.Items {
 		fmt.Printf("Namespace: %s, Name: %s\n", pod.Namespace, pod.Name)
 	}
+	CreateConfiMap()
+}
+
+func CreateConfiMap() {
+	configMapClient := clientset.CoreV1().ConfigMaps(apiv1.NamespaceDefault)
+	configMap := &apiv1.ConfigMap{
+					ObjectMeta: metav1.ObjectMeta{
+						Name: "config-example",
+					},
+					Data: map[string]string{
+						"app": "demo",
+					},
+				}
+	res, err := configMapClient.Create(context.TODO(), configMap, metav1.CreateOptions{})
+	if err != nil {
+		fmt.Println("Delete configMap config-example")
+		configMapClient.Delete(context.TODO(), "config-example", metav1.DeleteOptions{})
+	}
+	fmt.Printf("Created ConfigMap %q.\n", res.GetObjectMeta().GetName())
+	
 }
