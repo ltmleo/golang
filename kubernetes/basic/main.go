@@ -62,6 +62,7 @@ func main() {
 	}
 	GetPods("istio-system")
 	GetPods("")
+	CreateConfiMap()
 }
 
 func GetPods(namespace string) {
@@ -74,7 +75,6 @@ func GetPods(namespace string) {
 	for _,pod := range pods.Items {
 		fmt.Printf("Namespace: %s, Name: %s\n", pod.Namespace, pod.Name)
 	}
-	CreateConfiMap()
 }
 
 func CreateConfiMap() {
