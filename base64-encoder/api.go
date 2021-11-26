@@ -12,8 +12,7 @@ var port = "8081"
 
 func main() {
 	log.SetFormatter(&log.JSONFormatter{})
-	var router *mux.Router
-	router = mux.NewRouter().StrictSlash(true)
+	router := mux.NewRouter().StrictSlash(true)
 	log.Info("Setting API on path prefi '/api'") 
 	apiRouter := router.PathPrefix("/api").Subrouter()
 	log.Info("Setting method GET /encode")                                           
@@ -29,7 +28,7 @@ func GetEncode(w http.ResponseWriter, r *http.Request) {
 	log.Info("Request to Encode "+query )
 	payload := Encode(r.URL.Query().Get("string"))
 	response, _ := json.Marshal(payload)
-	log.Debug("Response: %s", response)
+	log.Debug("Response: " + string(response))
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
 }
@@ -44,7 +43,7 @@ func GetDecode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response, _ := json.Marshal(payload)
-	log.Debug("Response: %s", response)
+	log.Debug("Response: " + string(response))
 	w.WriteHeader(http.StatusOK)
 	w.Write(response)
 }
