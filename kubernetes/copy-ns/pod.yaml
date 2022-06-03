@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: iac-esteira-as-code
+  name: copy-ns
   namespace: dev
 spec:
   serviceAccountName: devops-corporativo
   serviceAccount: devops-corporativo
   containers:
-    - name: iac-esteira-as-code
+    - name: copy-ns
       image: leonardomontero/copy-ns:latest
       env:
       - name: COMMIT_CHANGES

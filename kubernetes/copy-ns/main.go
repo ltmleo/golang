@@ -47,7 +47,7 @@ func getEsteira(namespace string) {
 func applyEsteira(fileName string, destiny string) {
 	blackList := os.Getenv("RELEASES_BLACK_LIST")
 	esteira := esteira.Esteira{}
-	esteira.GetFromGit("16877", fileName)
+	esteira.GetFromGit(os.Getenv("GITLAB_GROUP_ID"), fileName)
 	for name, info := range esteira {
 		if !strings.Contains(blackList, name) {
 			values, _ := git.GetEnvFile(name, destiny)
