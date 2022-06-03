@@ -1,0 +1,26 @@
+{
+	"argocd-applicationset-controller": {
+		"name": "argocd-applicationset-controller",
+		"image": "quay.io/argoproj/argocd-applicationset:latest"
+	},
+	"argocd-dex-server": {
+		"name": "argocd-dex-server",
+		"image": "ghcr.io/dexidp/dex:v2.30.0"
+	},
+	"argocd-image-updater": {
+		"name": "argocd-image-updater",
+		"image": "argoprojlabs/argocd-image-updater:v0.11.3"
+	},
+	"argocd-redis": {
+		"name": "argocd-redis",
+		"image": "redis:6.2.4-alpine"
+	},
+	"argocd-repo-server": {
+		"name": "argocd-repo-server",
+		"image": "quay.io/argoproj/argocd:v2.2.2"
+	},
+	"argocd-server": {
+		"name": "argocd-server",
+		"image": "quay.io/argoproj/argocd:v2.2.2"
+	}
+}

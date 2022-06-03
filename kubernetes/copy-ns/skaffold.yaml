@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: sample-nodejs
+build:
+  local:
+    push: true
+
+  artifacts:
+  - image: leonardomontero/copy-ns
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - pod.yaml

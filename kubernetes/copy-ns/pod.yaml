@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: iac-esteira-as-code
+  namespace: dev
+spec:
+  serviceAccountName: devops-corporativo
+  serviceAccount: devops-corporativo
+  containers:
+    - name: iac-esteira-as-code
+      image: leonardomontero/copy-ns:latest
+      env:
+      - name: COMMIT_CHANGES
+        value: "true"
+      - name: K8S_CONFIG_MODE
+        value: in
+      - name: HELM_DRY_RUN
+        value: "false"
+      - name: HELM_UPGRADE_FORCE
+        value: "false"
+      - name: ENVIRONMENT
+        value: "production"
+
+      resources:
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+
+  restartPolicy: Always

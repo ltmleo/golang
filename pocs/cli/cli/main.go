@@ -5,11 +5,12 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package main
 
 import (
-	"10.129.178.173/LojaOnline/iac/iac-lojaonline-envs/cli/private"
-	"gopkg.in/yaml.v3"
-	"io/ioutil"
 	"fmt"
-	)
+	"io/ioutil"
+
+	"github.com/ltmleo/golang/pocs/cli/cli/LojaOnline/iac/iac-lojaonline-envs/cli/private"
+	"gopkg.in/yaml.v3"
+)
 
 func main() {
 	var config map[string]map[string]string
