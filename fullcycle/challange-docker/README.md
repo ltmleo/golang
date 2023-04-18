@@ -26,3 +26,4 @@ https://fcexperience.fullcycle.com.br/desafio/fcls-desafio/desafio-docker
 
 ## Image
 leonardomontero/full-cycle-challange-docker:fase01
+size: 1.23MB
